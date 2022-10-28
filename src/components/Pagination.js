@@ -1,24 +1,23 @@
-import React from 'react'
+import React from "react";
 
-const Pagination = ({data, RenderComponent, pageLimit, dataLimit}) => {
-
- const [pages] = React.useState(Math.round(data.length / dataLimit));
+const Pagination = ({ data, RenderComponent, pageLimit, dataLimit }) => {
+  const [pages] = React.useState(Math.round(data.length / dataLimit));
   const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
-  window.scrollTo({ behavior: 'smooth', top: '0px' });
-}, [currentPage]);
+    window.scrollTo({ behavior: "smooth", top: "0px" });
+  }, [currentPage]);
 
   function goToNextPage() {
-     setCurrentPage((page) => page + 1);
+    setCurrentPage((page) => page + 1);
   }
 
   function goToPreviousPage() {
-     setCurrentPage((page) => page - 1);
+    setCurrentPage((page) => page - 1);
   }
 
   function changePage(event) {
-     const pageNumber = Number(event.target.textContent);
+    const pageNumber = Number(event.target.textContent);
     setCurrentPage(pageNumber);
   }
 
@@ -29,41 +28,41 @@ const Pagination = ({data, RenderComponent, pageLimit, dataLimit}) => {
   };
 
   const getPaginationGroup = () => {
-      let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-     return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
+    let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+    return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
   };
   return (
     <>
-    <div>
-      {getPaginatedData().map((d, idx) => (
-        <RenderComponent key={idx} data={d} />
-      ))}
-    </div>
-    <div className="pagination">
-      <button
-        onClick={goToPreviousPage}
-        className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
-      >prev
-      </button>
-      {getPaginationGroup().map((item, index) => (
+      <div>
+        {getPaginatedData().map((d, idx) => (
+          <RenderComponent key={idx} data={d} />
+        ))}
+      </div>
+      <div className="pagination">
         <button
-          key={index}
-          onClick={changePage}
-          className={`paginationItem ${currentPage === item ? 'active' : null}`}
-        >
-        <span>{item}</span>
+          onClick={goToPreviousPage}
+          className={`prev ${currentPage === 1 ? "disabled" : ""}`}>
+          prev
         </button>
-      ))}
+        {getPaginationGroup().map((item, index) => (
+          <button
+            key={index}
+            onClick={changePage}
+            className={`paginationItem ${
+              currentPage === item ? "active" : null
+            }`}>
+            <span>{item}</span>
+          </button>
+        ))}
 
-      <button
-        onClick={goToNextPage}
-        className={`next ${currentPage === pages ? 'disabled' : ''}`}
-      >
-        next
-      </button>
-    </div>
+        <button
+          onClick={goToNextPage}
+          className={`next ${currentPage === pages ? "disabled" : ""}`}>
+          next
+        </button>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

@@ -4,20 +4,18 @@ import { Outlet } from "react-router-dom";
 import Pagination from "./Pagination";
 import SingleUser from "./SingleUser";
 
-const url = 'https://randomuser.me/api/?results=200'
+const url = "https://randomuser.me/api/?results=200";
 
 const User = () => {
+  const [data, setData] = React.useState([]);
 
-  const [data, setData] = React.useState([])
-  
-
-    React.useEffect(() => {
-    async function getUsers(){
-      const res =await fetch(url)
-      const data = await res.json()
-      setData(data.results)
-    };
-    getUsers()  
+  React.useEffect(() => {
+    async function getUsers() {
+      const res = await fetch(url);
+      const data = await res.json();
+      setData(data.results);
+    }
+    getUsers();
     // fetch(url)
     //   .then((response) => {
     //     if (response.ok) return response.json();
@@ -40,16 +38,17 @@ const User = () => {
 
       <Outlet />
       <div>
-        {data.length > 0? (
+        {data.length > 0 ? (
           <>
             <Pagination
-            data = {data}
-            RenderComponent = {SingleUser}
-            pageLimit = {5}
-            dataLimit = {5}>
-            </Pagination>
+              data={data}
+              RenderComponent={SingleUser}
+              pageLimit={5}
+              dataLimit={5}></Pagination>
           </>
-        ): (<h1>Waiting for users to load...</h1>)}
+        ) : (
+          <h1>Waiting for users to load...</h1>
+        )}
       </div>
     </>
   );
