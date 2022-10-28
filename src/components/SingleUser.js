@@ -22,7 +22,7 @@ const SingleUser = (props) => {
             {props.data.location.state}
           </p>
           <p>
-            Phone Number <br></br>
+            Phone<br></br>
             {props.data.phone}
           </p>
           <p>

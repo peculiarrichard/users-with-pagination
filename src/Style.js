@@ -96,11 +96,11 @@ export const UserContainer = styled.div`
   }
   .span {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 0.5rem;
     gap: 1rem;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 400;
   }
 `;
